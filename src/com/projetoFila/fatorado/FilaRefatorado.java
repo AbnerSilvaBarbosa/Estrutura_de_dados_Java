@@ -1,10 +1,9 @@
-package com.projetofila;
+package com.projetoFila.fatorado;
 
-public class Fila {
+public class FilaRefatorado<T> {
+    private NoRefatorado<T> refNoFila;
 
-    private No refNoFila;
-
-    public Fila() {
+    public FilaRefatorado() {
         this.refNoFila = null;
     }
 
@@ -12,15 +11,16 @@ public class Fila {
         return refNoFila == null ? true:false;
     }
 
-    public void enqueue(No novoNo){
+    public void enqueue(T valueNo){
+        NoRefatorado<T> novoNo = new NoRefatorado<T>(valueNo);
         novoNo.setRefNo(refNoFila);
         refNoFila = novoNo;
     }
 
-    public No dequeue(){
+    public Object dequeue(){
         if(!isEmpty()){
-            No proximoNo = refNoFila;
-            No auxiliarNo = refNoFila;
+            NoRefatorado<T> proximoNo = refNoFila;
+            NoRefatorado<T> auxiliarNo = refNoFila;
             while (true){
                 if(proximoNo.getRefNo() != null){
                     auxiliarNo = proximoNo;
@@ -31,7 +31,24 @@ public class Fila {
                 }
             }
 
-            return proximoNo;
+            return proximoNo.getObject();
+        }
+
+        return null;
+    }
+
+    public Object first(){
+        if(!this.isEmpty()){
+            NoRefatorado<T> primeiroNo = refNoFila;
+            while (true){
+                if(primeiroNo.getObject() != null){
+                    primeiroNo = primeiroNo.getRefNo();
+                }else{
+                    break;
+                }
+            }
+
+            return primeiroNo.getObject();
         }
 
         return null;
@@ -40,7 +57,7 @@ public class Fila {
     @Override
     public String toString() {
         String stringRetorno = "";
-        No noAuxiliar = refNoFila;
+        NoRefatorado<T> noAuxiliar = refNoFila;
 
         if(refNoFila != null){
             while(true){

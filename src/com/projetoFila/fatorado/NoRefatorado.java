@@ -1,11 +1,10 @@
-package com.projetofila;
+package com.projetoFila.fatorado;
 
-public class No {
+public class NoRefatorado<T> {
+    private T object;
+    private NoRefatorado<T> refNo;
 
-    private Object object;
-    private No refNo;
-
-    public No(Object object) {
+    public NoRefatorado(T object) {
         this.object = object;
         this.refNo = null;
     }
@@ -14,15 +13,15 @@ public class No {
         return object;
     }
 
-    public void setObject(Object object) {
+    public void setObject(T object) {
         this.object = object;
     }
 
-    public No getRefNo() {
+    public NoRefatorado<T> getRefNo() {
         return refNo;
     }
 
-    public void setRefNo(No refNo) {
+    public void setRefNo(NoRefatorado<T> refNo) {
         this.refNo = refNo;
     }
 
